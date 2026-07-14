@@ -1,4 +1,4 @@
-package com.prakhar.demo;
+package com.prakhar.demo.Java;
 
 class P {
     void m1()

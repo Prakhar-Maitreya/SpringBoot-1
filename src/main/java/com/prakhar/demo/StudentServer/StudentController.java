@@ -7,26 +7,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class StudentController
-{
+public class StudentController {
 
     StudentService studentService;
 
     @Autowired
-    public StudentController(StudentService studentService)
-    {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Student> storeStudent(@RequestBody Student student)
-    {
+    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
         Student result = studentService.studentValidate(student);
+
         if(result == null)
         {
-            return ResponseEntity.status(400).body(result);
+           return ResponseEntity.status(400).body("Invalid input");
         }
-        return ResponseEntity.status(201).body(result);
+        return  ResponseEntity.status(201).body(result);
     }
-
 }

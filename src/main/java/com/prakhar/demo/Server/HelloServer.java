@@ -4,11 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloServer
-{
+public class HelloServer {
+
     @GetMapping("/hello")
-    public String hello()
-    {
-        return "Hello Prakhar";
+    public String hello() {
+        return "Hello Mohit";
     }
 }

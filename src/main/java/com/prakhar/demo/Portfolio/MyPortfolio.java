@@ -4,61 +4,80 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MyPortfolio
-{
-    @GetMapping("/myself")
-    public String Myself()
-    {
-        return """
-                <h1>Myself</h1>
-                <p>My name is Prakhar Maitreya Parashar</p>
-                <ul>
-                <li>Current CGPA: 7.56</l1>
-                <li><a href="https://github.com/Prakhar-Maitreya">Github Link</a></li>
-                <li><a href="https://www.linkedin.com/in/prakhar-maitreya/">Linkedin Link</a></li>
-                </ul>
-                """;
+public class MyPortfolio {
+
+    @GetMapping("/mySelf")
+    public String Myself() {
+    return """
+            <h1>Myself</h1>
+            <p> simple line about yourself </p>
+            <ul>
+            <li>gitHub Link : link</li>
+            <li>Leetcode Link : link link</li>
+            </ul>
+            """;
     }
 
     @GetMapping("/education")
-    public String Education()
-    {
+    public String getEducation() {
         return """
-                <h1>Education</h1>
-                <p></p>
+                <h2>Education</h2>
                 <ul>
-                <li>Lovely Professional University: Current CGPA: 7.56</l1>
-                <li>12th: 68.6%</li>
-                <li>10th: 86.8%</li>
+                    <li><b>Master of Computer Applications (MCA)</b></li>
+                    <li>Semester: 4th</li>
+                    <li>Background: Non-Technical (Successfully transitioned into Software Development)</li>
                 </ul>
                 """;
     }
 
     @GetMapping("/skills")
-    public String Skills()
-    {
+    public String getSkills() {
         return """
-                <h1>Skills</h1>
-                <p>The following are my technical skills</p>
+                <h2>Technical Skills</h2>
                 <ul>
-                <li>Programming Languages: C++, c, Java, Python, Javascript</l1>
-                <li>Frameworks: Spring, SpringBoot, Django, React, Node</li>
-                <li>Tools: MySQL, PostGresSQL, NoSQL, GIT</li>
+                    <li>Java</li>
+                    <li>Spring Core</li>
+                    <li>Spring Boot</li>
+                    <li>Spring MVC</li>
+                    <li>Spring Data JPA</li>
+                    <li>Hibernate</li>
+                    <li>REST API Development</li>
+                    <li>MySQL</li>
+                    <li>H2 Database</li>
+                    <li>Maven</li>
+                    <li>Git & GitHub</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
                 </ul>
                 """;
     }
 
-    @GetMapping("/project")
-    public String Project()
-    {
+    @GetMapping("/projectname")
+    public String getProjects() {
         return """
-                <h1>Projects</h1>
-                <p>The following are my projects</p>
+                <h2>Projects</h2>
+                <ol>
+                    <li><b>Travel Booking Platform</b> - Built using Java, Spring Boot, RBAC, and REST APIs.</li>
+                    <li><b>URL Shortener</b> - Node.js, Express.js, MongoDB, and EJS.</li>
+                    <li><b>Student Management System</b> - Spring Boot + Spring Data JPA + H2/MySQL.</li>
+                </ol>
+                """;
+    }
+
+    @GetMapping("/contact")
+    public String getContact() {
+        return """
+                <h2>Contact</h2>
                 <ul>
-                <li><a href="https://github.com/Prakhar-Maitreya/Library-Management-System">Library Management System Backend API</a></li>
-                <li><a href="https://github.com/Prakhar-Maitreya/Employee-Portal-Cipherschools">Employee Management System</a></li>
-                <li><a href="https://github.com/Prakhar-Maitreya/Rainwater-Harvesting-Mini-website">Rainwater Harvesting Awareness website</a></li>
+                    <li>Name: Mohit</li>
+                    <li>Role: Software Engineer</li>
+                    <li>GitHub: github.com/your-github</li>
+                    <li>LinkedIn: linkedin.com/in/your-linkedin</li>
+                    <li>Email: your-email@example.com</li>
                 </ul>
                 """;
     }
+
 }

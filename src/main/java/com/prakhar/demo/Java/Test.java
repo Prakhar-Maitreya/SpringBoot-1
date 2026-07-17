@@ -1,26 +1,23 @@
 package com.prakhar.demo.Java;
 
-class P {
-    void m1()
-    {
+
+class p{
+    void m1(){
 
     }
 
-    void m2()
-    {
+    void m2(){
 
     }
 }
-class c1 extends  P
-{
-    void m3()
-    {
+
+class c1 extends p{
+    void m3() {
 
     }
 }
-class Test
-{
-    c1 c1 = new c1();
-    //c1 c1 = new P(); not possible as object is expected to run m3() as well which p class doesn't have
-}
 
+public class Test {
+//    c1 c1=new c1();
+//    c1 c1 = new p();
+}

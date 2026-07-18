@@ -1,5 +1,6 @@
 package com.prakhar.demo.StudentServer.DTO;
 
-public class RequestStudentDTO {
+public class RequestStudentDTO
+{
 
 }

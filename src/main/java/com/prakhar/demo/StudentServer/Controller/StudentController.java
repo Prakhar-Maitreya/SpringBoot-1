@@ -1,10 +1,10 @@
-package com.prakhar.demo.StudentServer;
+package com.prakhar.demo.StudentServer.Controller;
 
+import com.prakhar.demo.StudentServer.Entity.Student;
+import com.prakhar.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
@@ -26,4 +26,24 @@ public class StudentController {
         }
         return  ResponseEntity.status(201).body(result);
     }
+
+    @GetMapping("/getStudent/{id}")
+    public ResponseEntity<?> getStudentById(@PathVariable int id){
+        Student student = studentService.getStudentById(id);
+        return ResponseEntity.status(200).body(student);
+    }
 }
+
+/**
+
+ */
+
+
+
+
+
+
+
+
+
+

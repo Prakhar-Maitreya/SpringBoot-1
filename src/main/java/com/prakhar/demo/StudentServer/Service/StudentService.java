@@ -1,5 +1,7 @@
-package com.prakhar.demo.StudentServer;
+package com.prakhar.demo.StudentServer.Service;
 
+import com.prakhar.demo.StudentServer.Entity.Student;
+import com.prakhar.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,9 @@ public class StudentService {
         studentRepository.save(student);
         return student;
 
+    }
+
+    public Student getStudentById(int id) {
+        return studentRepository.findById(id).orElse(null);
     }
 }

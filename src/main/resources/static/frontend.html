@@ -346,7 +346,7 @@
     <!-- UPDATE -->
     <section class="card" id="card-update">
         <div class="punch"></div>
-        <div class="status-tag">PUT /updateStudent/:id</div>
+        <div class="status-tag">PUT /updateStudent</div>
         <div class="card-title">Amend a Card</div>
         <p class="card-desc">Revise the details already on file. All fields are saved as entered — fill in every one, including values that stay the same.</p>
 
@@ -465,13 +465,13 @@
 
         if (!id) return showResult('result-update', false, 'Enter a student ID first.');
         if (!name || !age || !department) {
-            return showResult('result-update', false, 'This endpoint overwrites the whole record — fill in name, age, and department.');
+            return showResult('result-update', false, 'Fill in name, age, and department.');
         }
 
-        callApi(`${base()}/updateStudent/${encodeURIComponent(id)}`, {
+        callApi(`${base()}/updateStudent`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, age, department }),
+            body: JSON.stringify({ id: parseInt(id), name, age: parseInt(age), department }),
         }, 'result-update');
     }
 

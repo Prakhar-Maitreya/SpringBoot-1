@@ -2,6 +2,8 @@ package com.prakhar.demo.StudentServer.Controller;
 
 import com.prakhar.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.prakhar.demo.StudentServer.DTO.CreateStudentResponseDTO;
+import com.prakhar.demo.StudentServer.DTO.UpdateStudentRequestDTO;
+import com.prakhar.demo.StudentServer.DTO.UpdateStudentResponseDTO;
 import com.prakhar.demo.StudentServer.Entity.Student;
 import com.prakhar.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,15 @@ public class StudentController {
         if(result == null)
         {
             return ResponseEntity.status(400).body("Invalid input");
+        }
+        return ResponseEntity.status(200).body(result);
+    }
+
+    @PutMapping("/updateStudent")
+    public ResponseEntity<?> updateStudentWithDTO(@RequestBody UpdateStudentRequestDTO dto) {
+        UpdateStudentResponseDTO result = studentService.studentUpdateWithDTO(dto);
+        if (result == null) {
+            return ResponseEntity.status(404).body("Student not found with id: " + dto.getId());
         }
         return ResponseEntity.status(200).body(result);
     }

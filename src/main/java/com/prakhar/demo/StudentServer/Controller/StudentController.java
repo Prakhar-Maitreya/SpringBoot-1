@@ -1,5 +1,7 @@
 package com.prakhar.demo.StudentServer.Controller;
 
+import com.prakhar.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.prakhar.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.prakhar.demo.StudentServer.Entity.Student;
 import com.prakhar.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin
 public class StudentController {
 
     StudentService studentService;
@@ -17,9 +18,14 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+    @GetMapping("/")
+    public void index(jakarta.servlet.http.HttpServletResponse response) throws java.io.IOException {
+        response.sendRedirect("/frontend.html");
+    }
+
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
-        Student result = studentService.studentValidate(student);
+    public ResponseEntity<?> storeStudent(@RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
+        CreateStudentResponseDTO result = studentService.studentValidate(createStudentRequestDTO);
 
         if(result == null)
         {

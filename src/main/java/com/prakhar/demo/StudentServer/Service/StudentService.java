@@ -1,5 +1,6 @@
 package com.prakhar.demo.StudentServer.Service;
 
+import com.prakhar.demo.Exception.CheckedException;
 import com.prakhar.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.prakhar.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.prakhar.demo.StudentServer.Entity.Student;
@@ -26,10 +27,15 @@ public class StudentService {
         return mapToResponseDTO(student);
     }
 
-    public Student getStudentById(int id) throws Exception {
+    public Student getStudentById(int id) throws CheckedException {
+
         Optional<Student> student = studentRepository.findById(id);
+
+        if (student.isEmpty()) {
+            throw new CheckedException("Student not found with id: " + id);
+        }
+
         return student.get();
-        //return studentRepository.findById(id).orElseThrow(()->new Exception());
     }
 
     public Student studentUpdate(int id, Student student) {

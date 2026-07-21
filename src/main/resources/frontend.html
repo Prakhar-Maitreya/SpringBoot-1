@@ -305,7 +305,7 @@
             </div>
             <div class="field">
                 <label for="c-id">Student ID</label>
-                <input id="c-id" type="text" placeholder="(Auto-assigned by database)" disabled>
+                <input id="c-id" type="text" placeholder="e.g. XXXXXXXX">
             </div>
         </div>
         <div class="row-2">
@@ -346,7 +346,7 @@
     <!-- UPDATE -->
     <section class="card" id="card-update">
         <div class="punch"></div>
-        <div class="status-tag">PUT /updateStudent</div>
+        <div class="status-tag">PUT /updateStudent/:id</div>
         <div class="card-title">Amend a Card</div>
         <p class="card-desc">Revise the details already on file. All fields are saved as entered — fill in every one, including values that stay the same.</p>
 
@@ -438,9 +438,10 @@
     // ---- CREATE ----
     function createStudent() {
         const payload = {
+            id: document.getElementById('c-id').value.trim(),
             name: document.getElementById('c-name').value.trim(),
             age: document.getElementById('c-age').value.trim(),
-            department: document.getElementById('c-dep').value.trim(),
+            dep: document.getElementById('c-dep').value.trim(),
         };
         callApi(`${base()}/create`, {
             method: 'POST',
@@ -461,17 +462,17 @@
         const id = document.getElementById('u-id').value.trim();
         const name = document.getElementById('u-name').value.trim();
         const age = document.getElementById('u-age').value.trim();
-        const department = document.getElementById('u-dep').value.trim();
+        const dep = document.getElementById('u-dep').value.trim();
 
         if (!id) return showResult('result-update', false, 'Enter a student ID first.');
-        if (!name || !age || !department) {
-            return showResult('result-update', false, 'Fill in name, age, and department.');
+        if (!name || !age || !dep) {
+            return showResult('result-update', false, 'This endpoint overwrites the whole record — fill in name, age, and department.');
         }
 
-        callApi(`${base()}/updateStudent`, {
+        callApi(`${base()}/updateStudent/${encodeURIComponent(id)}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: parseInt(id), name, age: parseInt(age), department }),
+            body: JSON.stringify({ name, age, dep }),
         }, 'result-update');
     }
 

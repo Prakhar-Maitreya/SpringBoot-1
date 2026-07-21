@@ -2,14 +2,13 @@ package com.prakhar.demo.StudentServer.Service;
 
 import com.prakhar.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.prakhar.demo.StudentServer.DTO.CreateStudentResponseDTO;
-import com.prakhar.demo.StudentServer.DTO.UpdateStudentRequestDTO;
-import com.prakhar.demo.StudentServer.DTO.UpdateStudentResponseDTO;
 import com.prakhar.demo.StudentServer.Entity.Student;
 import com.prakhar.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -23,12 +22,14 @@ public class StudentService {
     public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
 
         Student student = mapToStudent(createStudentRequestDTO);
-        Student savedStudent = studentRepository.save(student);
-        return mapToResponseDTO(savedStudent);
+        studentRepository.save(student);
+        return mapToResponseDTO(student);
     }
 
-    public Student getStudentById(int id) {
-        return studentRepository.findById(id).orElse(null);
+    public Student getStudentById(int id) throws Exception {
+        Optional<Student> student = studentRepository.findById(id);
+        return student.get();
+        //return studentRepository.findById(id).orElseThrow(()->new Exception());
     }
 
     public Student studentUpdate(int id, Student student) {
@@ -45,31 +46,6 @@ public class StudentService {
         result.setUpdatedAt(LocalDateTime.now());
 
         return studentRepository.save(result);
-    }
-
-    public UpdateStudentResponseDTO studentUpdateWithDTO(UpdateStudentRequestDTO dto) {
-
-        Student result = studentRepository.findById(dto.getId()).orElse(null);
-
-        if (result == null) {
-            return null;
-        }
-
-        result.setName(dto.getName());
-        result.setAge(dto.getAge());
-        result.setDepartment(dto.getDepartment());
-        result.setUpdatedAt(LocalDateTime.now());
-
-        Student saved = studentRepository.save(result);
-
-        UpdateStudentResponseDTO response = new UpdateStudentResponseDTO();
-        response.setMessage("Student record updated successfully!");
-        response.setId(saved.getId());
-        response.setName(saved.getName());
-        response.setAge(saved.getAge());
-        response.setDepartment(saved.getDepartment());
-
-        return response;
     }
 
     public Student deleteStudent(int id) {

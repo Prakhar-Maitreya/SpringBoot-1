@@ -1,6 +1,7 @@
 package com.prakhar.demo.StudentServer.Service;
 
 import com.prakhar.demo.Exception.CheckedException;
+import com.prakhar.demo.Exception.EmailAlreadyExistsException;
 import com.prakhar.demo.StudentServer.DTO.CreateStudentRequestDTO;
 import com.prakhar.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.prakhar.demo.StudentServer.Entity.Student;
@@ -22,6 +23,7 @@ public class StudentService {
 
     public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
 
+        validateEmail(createStudentRequestDTO.getEmail());
         Student student = mapToStudent(createStudentRequestDTO);
         studentRepository.save(student);
         return mapToResponseDTO(student);
@@ -69,6 +71,7 @@ public class StudentService {
         student.setName(createStudentRequestDTO.getName());
         student.setAge(createStudentRequestDTO.getAge());
         student.setDepartment(createStudentRequestDTO.getDepartment());
+        student.setEmail(createStudentRequestDTO.getEmail());
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
 
@@ -80,9 +83,20 @@ public class StudentService {
         createStudentResponseDTO.setId(student.getId());
         createStudentResponseDTO.setName(student.getName());
         createStudentResponseDTO.setAge(student.getAge());
+        createStudentResponseDTO.setEmail(student.getEmail());
         createStudentResponseDTO.setDepartment(student.getDepartment());
 
         return createStudentResponseDTO;
+
+    }
+
+    private void validateEmail(String email) {
+
+        if(studentRepository.existsByEmail(email)) {
+            throw new EmailAlreadyExistsException(
+                    "Email already exists : " + email
+            );
+        }
 
     }
 }

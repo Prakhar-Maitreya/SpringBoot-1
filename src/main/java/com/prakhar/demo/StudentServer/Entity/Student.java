@@ -26,6 +26,16 @@ public class Student {
     @Size(min = 2, max = 50, message = "Department must be between 2 and 50 characters")
     private String department;
 
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
